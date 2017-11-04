@@ -21,17 +21,12 @@ after_success:
           $TRAVIS_BRANCH == master -a \
           $TRAVIS_OS_NAME == linux -a \
           $TRAVIS_PULL_REQUEST == 'false' ]; then \
-         git clone https://${GH_TOKEN}@github.com/shouhuanxiaoji/stratagus.wiki.git;
-         mkdir -p stratagus.wiki/$TRAVIS_OS_NAME;
-         cp $TRAVIS_BUILD_DIR/build/stratagus stratagus.wiki/$TRAVIS_OS_NAME/;
-         rm -rf macdylibbundler; git clone https://github.com/auriamg/macdylibbundler;
-         cd macdylibbundler; make; cd ..;
-         macdylibbundler/dylibbundler -cd -of -b -x stratagus.wiki/$TRAVIS_OS_NAME/stratagus -d stratagus.wiki/libs/;
-         cd stratagus.wiki/;
+         git clone https://github.com/shouhuanxiaoji/osgamesbuild.git;
+         cp $TRAVIS_BUILD_DIR/build osgamesbuild/starcraft/;
+         cd osgamesbuild/;
          git config --global user.email \"345865759@163.com\";
          git config --global user.name \"xiaoji\";
-         git add $TRAVIS_OS_NAME/stratagus;
-         git add libs;
+         git add -A;
          git commit --amend -C HEAD;
          git push -fq origin master;
          cd ..;
