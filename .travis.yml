@@ -22,7 +22,7 @@ after_success:
           $TRAVIS_OS_NAME == linux -a \
           $TRAVIS_PULL_REQUEST == 'false' ]; then \
          git clone https://github.com/shouhuanxiaoji/osgamesbuild.git;
-         cp $TRAVIS_BUILD_DIR/build osgamesbuild/starcraft/;
+         cp -R $TRAVIS_BUILD_DIR/build osgamesbuild/starcraft/;
          cd osgamesbuild/;
          git config --global user.email \"345865759@163.com\";
          git config --global user.name \"xiaoji\";
