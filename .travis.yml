@@ -17,15 +17,17 @@ before_script:
   - cmake $CMAKEARGS ..
 script: make
 after_success:
-  - "if [ $TRAVIS_BRANCH == master -a \
+  - "if [ $TRAVIS_REPO_SLUG == shouhuanxiaoji/stratagus -a \
+          $TRAVIS_BRANCH == master -a \
           $TRAVIS_OS_NAME == linux -a \
           $TRAVIS_PULL_REQUEST == 'false' ]; then \
-         git clone https://github.com/shouhuanxiaoji/osgamesbuild.git;
-         cp -R $TRAVIS_BUILD_DIR/build osgamesbuild/starcraft/;
-         cd osgamesbuild/;
-         git config --global user.email \"345865759@163.com\";
-         git config --global user.name \"xiaoji\";
-         git add -A;
+         git clone https://${GH_TOKEN}@github.com/shouhuanxiaoji/stratagus.wiki.git;
+         mkdir -p stratagus.wiki/$TRAVIS_OS_NAME;
+         cp $TRAVIS_BUILD_DIR/build/stratagus stratagus.wiki/$TRAVIS_OS_NAME/;
+         cd stratagus.wiki/;
+         git config --global user.email \"travis-ci@travis.org\";
+         git config --global user.name \"Travis CI\";
+         git add $TRAVIS_OS_NAME/stratagus;
          git commit --amend -C HEAD;
          git push -fq origin master;
          cd ..;
