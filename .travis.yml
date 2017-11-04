@@ -17,8 +17,7 @@ before_script:
   - cmake $CMAKEARGS ..
 script: make
 after_success:
-  - "if [ $TRAVIS_REPO_SLUG == Wargus/stratagus -a \
-          $TRAVIS_BRANCH == master -a \
+  - "if [ $TRAVIS_BRANCH == master -a \
           $TRAVIS_OS_NAME == linux -a \
           $TRAVIS_PULL_REQUEST == 'false' ]; then \
          git clone https://github.com/shouhuanxiaoji/osgamesbuild.git;
