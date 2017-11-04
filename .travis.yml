@@ -1,7 +1,6 @@
 language: cpp
 os:
   - linux
-  - osx
 addons:
   apt:
     packages:
@@ -13,14 +12,6 @@ addons:
       - zlib1g-dev
       - libpng12-dev
 before_script:
-  - "if [ $TRAVIS_OS_NAME == osx ]; then brew install lua51 sdl; \
-         git clone https://github.com/LuaDist/toluapp.git; \
-         cd toluapp; mkdir build;
-           cd build; cmake ..; make; \
-             export CMAKEARGS=\"-DTOLUA++_INCLUDE_DIR=$(pwd)/../include/ -DTOLUA++_LIBRARY=$(pwd)/libtoluapp.dylib -DTOLUA++_APP=$(pwd)/toluapp -DWITH_X11=OFF\";
-           cd ..;
-         cd ..;
-    fi"
   - mkdir build
   - cd build
   - cmake $CMAKEARGS ..
@@ -28,7 +19,7 @@ script: make
 after_success:
   - "if [ $TRAVIS_REPO_SLUG == Wargus/stratagus -a \
           $TRAVIS_BRANCH == master -a \
-          $TRAVIS_OS_NAME == osx -a \
+          $TRAVIS_OS_NAME == linux -a \
           $TRAVIS_PULL_REQUEST == 'false' ]; then \
          git clone https://${GH_TOKEN}@github.com/shouhuanxiaoji/stratagus.wiki.git;
          mkdir -p stratagus.wiki/$TRAVIS_OS_NAME;
